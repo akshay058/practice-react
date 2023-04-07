@@ -4,6 +4,7 @@ import Comp1 from "./Comp1";
 import Comp4 from "./Comp4";
 import ApiFetch from "./ApiFetch";
 import FormComp from "./FormComp";
+import ThemeToggle from "./ThemeToggle";
 export const messagecontext = createContext(null);
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
       {/* <ApiFetch /> */}
       {/* ............API Fetch...... */}
 
-      <FormComp />
+      {/* <FormComp /> */}
+      <ThemeToggle />
     </div>
   );
 }
