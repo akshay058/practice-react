@@ -12,7 +12,7 @@ export default function ThemeToggle() {
             <i class="fa-solid fa-sun"></i>
           </div>
         ) : (
-          <i class="fa-solid fa-moon"></i>
+          <i className="fa-solid fa-moon"></i>
         )}
       </div>
       <div

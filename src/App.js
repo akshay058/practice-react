@@ -5,6 +5,7 @@ import Comp4 from "./Comp4";
 import ApiFetch from "./ApiFetch";
 import FormComp from "./FormComp";
 import ThemeToggle from "./ThemeToggle";
+import UseReducerHook from "./AdvancedHooks/useReducerHook";
 export const messagecontext = createContext(null);
 
 function App() {
@@ -19,18 +20,16 @@ function App() {
         </h1>
         <h3>{name}</h3>
       </messagecontext.Provider> */}
-
       {/* <button onClick={() => setMount(!mount)}>Mount/UnMount </button>
       {mount && <Comp4 />}
 
       <h2>Component in Mount state</h2> */}
-
       {/* ............API Fetch...... */}
       {/* <ApiFetch /> */}
       {/* ............API Fetch...... */}
-
       {/* <FormComp /> */}
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
+      <UseReducerHook />
     </div>
   );
 }

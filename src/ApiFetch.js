@@ -2,22 +2,25 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Spinner } from "react-bootstrap";
+import { useFetch } from "./CustomHook/CustomerHook";
 
 export default function ApiFetch() {
-  const [apiData, setData] = useState([]);
+  //   const [apiData, setData] = useState([]);
   const [filter, setFilter] = useState("products");
 
-  const fetchData = async () => {
-    // debugger;
-    const res = await fetch(`https://dummyjson.com/${filter}`);
-    const data = await res.json();
-    setData(filter === "products" ? data.products : data.users);
-    console.log(data);
-  };
-  useEffect(() => {
-    setData([]);
-    fetchData();
-  }, [filter]);
+  //   const fetchData = async () => {
+  //     // debugger;
+  //     const res = await fetch(`https://dummyjson.com/${filter}`);
+  //     const data = await res.json();
+  //     setData(filter === "products" ? data.products : data.users);
+  //     console.log(data);
+  //   };
+  //   useEffect(() => {
+  //     setData([]);
+  //     fetchData();
+  //   }, [filter]);
+  const { data } = useFetch("https://dummyjson.com", filter);
+  console.log(data);
   return (
     <div>
       <div className="d-flex justify-content-center my-5">
@@ -32,7 +35,7 @@ export default function ApiFetch() {
       </div>
       <div className="fs-2"> Product API</div>;
       <div className="mt-3 d-flex flex-wrap justify-content-around">
-        {apiData.length === 0 ? (
+        {data.length === 0 ? (
           <div className="d-flex">
             <Spinner animation="grow" variant="primary" />
             <Spinner animation="grow" variant="secondary" />
@@ -41,7 +44,7 @@ export default function ApiFetch() {
             <Spinner animation="grow" variant="warning" />
           </div>
         ) : (
-          apiData.map((elem, index) => {
+          data.map((elem, index) => {
             return (
               <div className="my-3" key={index}>
                 <Card
