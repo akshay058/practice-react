@@ -9,9 +9,9 @@ export default function UseReducerHook() {
   const reducer = (state = initialState, action) => {
     switch (action.type) {
       case "increment":
-        return { ...state, count: state.count + 1 };
+        return { ...state, count: state.count + action.payload };
       case "decrement":
-        return { ...state, count: state.count - 1 };
+        return { ...state, count: state.count - action.payload };
       default:
         return { ...state };
     }
@@ -24,13 +24,13 @@ export default function UseReducerHook() {
       <div>
         <button
           className="btn btn-success me-3"
-          onClick={() => dispatch({ type: "increment" })}
+          onClick={() => dispatch({ type: "increment", payload: 10 })}
         >
           Increment
         </button>
         <button
           className="btn btn-danger"
-          onClick={() => dispatch({ type: "decrement" })}
+          onClick={() => dispatch({ type: "decrement", payload: 10 })}
         >
           Decrement
         </button>

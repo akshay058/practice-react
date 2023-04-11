@@ -5,7 +5,9 @@ import Comp4 from "./Comp4";
 import ApiFetch from "./ApiFetch";
 import FormComp from "./FormComp";
 import ThemeToggle from "./ThemeToggle";
-import UseReducerHook from "./AdvancedHooks/useReducerHook";
+import UseReducerHook from "./AdvancedHooks/UseReducerHook";
+import UseMemoHook from "./AdvancedHooks/UseMemoHook";
+import Todo from "./Todo";
 export const messagecontext = createContext(null);
 
 function App() {
@@ -29,7 +31,9 @@ function App() {
       {/* ............API Fetch...... */}
       {/* <FormComp /> */}
       {/* <ThemeToggle /> */}
-      <UseReducerHook />
+      {/* <UseReducerHook /> */}
+      {/* <UseMemoHook /> */}
+      <Todo />
     </div>
   );
 }
