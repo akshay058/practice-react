@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import TodoItem from "./TodoItem";
 
 export default function Todo() {
   const [inputVal, setInputVal] = useState("");
   const [todoArr, setTodoArr] = useState([
-    { id: "6954125", text: "Todo 1" },
-    { id: "bb34433", text: "Todo 2" },
+    { id: "6954125", text: "Todo 1", completed: false },
+    { id: "bb34433", text: "Todo 2", completed: true },
   ]);
   const [isEditing, setIsEditing] = useState({
     editing: false,
@@ -14,7 +15,11 @@ export default function Todo() {
     if (!inputVal) return;
     setTodoArr([
       ...todoArr,
-      { id: crypto.randomUUID().split("-")[0], text: inputVal },
+      {
+        id: crypto.randomUUID().split("-")[0],
+        text: inputVal,
+        completed: false,
+      },
     ]);
     console.log(todoArr);
 
@@ -50,6 +55,18 @@ export default function Todo() {
     setIsEditing({ editing: false, editId: "" });
   };
 
+  const handleCompleted = (todo) => {
+    console.log(todo);
+    const cloneArr = [...todoArr];
+    const elem = cloneArr.findIndex((elem) => elem.id === todo.id);
+    const newTodoBeAdded = {
+      ...todo,
+      completed: !todo.completed,
+    };
+    cloneArr[elem] = newTodoBeAdded;
+    setTodoArr(cloneArr);
+  };
+
   return (
     <div className="container">
       <h2 className="mt-3">Todo App</h2>
@@ -80,25 +97,13 @@ export default function Todo() {
         {todoArr.length > 0 &&
           todoArr.map((todo, index) => {
             return (
-              <div className="row mt-2 w-75" key={index}>
-                <div className="col-sm-3 col-md-5 fs-4 text-start ms-5">
-                  {todo.text}{" "}
-                </div>
-                <button
-                  className="col-2 offset-sm-1 offset-md-2 btn btn-info me-3"
-                  onClick={() => {
-                    onEditHandler(todo.id, todo.text);
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  className="col-2 btn btn-danger"
-                  onClick={() => onDeleteHandler(todo.id)}
-                >
-                  Delete
-                </button>
-              </div>
+              <TodoItem
+                key={index}
+                onDeleteHandler={onDeleteHandler}
+                todo={todo}
+                onEditHandler={onEditHandler}
+                handleCompleted={handleCompleted}
+              />
             );
           })}
       </div>
