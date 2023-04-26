@@ -17,7 +17,7 @@ export default function ApiFetch() {
   //   };
   //   useEffect(() => {
   //     setData([]);
-  //     fetchData();
+  // fetchData();
   //   }, [filter]);
   const { data } = useFetch("https://dummyjson.com", filter);
   console.log(data);
