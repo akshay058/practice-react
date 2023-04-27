@@ -11,6 +11,11 @@ export default function Todo() {
     editing: false,
     editId: "",
   });
+  const ALL = "ALL";
+  const COMPLETED = "COMPLETED";
+  const PENDING = "PENDING";
+  const [filter, setFilter] = useState(ALL);
+
   const onAddTodoHandler = () => {
     if (!inputVal) return;
     setTodoArr([
@@ -66,6 +71,11 @@ export default function Todo() {
     cloneArr[elem] = newTodoBeAdded;
     setTodoArr(cloneArr);
   };
+  const onMarkCompleteHandler = () => {
+    const clonedArr = [...todoArr];
+    const updatedArr = clonedArr.map((elem) => ({ ...elem, completed: true }));
+    setTodoArr(updatedArr);
+  };
 
   return (
     <div className="container">
@@ -89,13 +99,47 @@ export default function Todo() {
             className="btn btn-warning ms-3"
             onClick={() => updateTodoHandler()}
           >
-            Update
+            Update Todo
           </button>
         )}
-        
+        <button
+          className="btn btn-dark ms-2"
+          onClick={() => onMarkCompleteHandler()}
+        >
+          Mark All Complete
+        </button>
+      </div>
+      <div className="d-flex justify-content-center my-3">
+        <div className="row w-75 justify-content-around">
+          <button
+            onClick={() => setFilter(ALL)}
+            className={`${
+              filter === ALL ? "btn-success" : "btn-otline-success"
+            } col-2 btn`}
+          >
+            ALL
+          </button>
+          <button
+            onClick={() => setFilter(COMPLETED)}
+            className={`${
+              filter === COMPLETED ? "btn-success" : "btn-otline-success"
+            } col-2 btn`}
+          >
+            Completed
+          </button>
+          <button
+            onClick={() => setFilter(PENDING)}
+            className={`${
+              filter === PENDING ? "btn-success" : "btn-otline-success"
+            } col-2 btn`}
+          >
+            Pending
+          </button>
+        </div>
       </div>
       <div className="d-flex flex-column align-items-center mt-3">
         {todoArr.length > 0 &&
+          filter === ALL &&
           todoArr.map((todo, index) => {
             return (
               <TodoItem
@@ -107,6 +151,34 @@ export default function Todo() {
               />
             );
           })}
+        {todoArr.length > 0 &&
+          filter === COMPLETED &&
+          todoArr.map(
+            (todo, index) =>
+              todo.completed && (
+                <TodoItem
+                  key={index}
+                  todo={todo}
+                  onDeleteHandler={onDeleteHandler}
+                  onEditHandler={onEditHandler}
+                  handleCompleted={handleCompleted}
+                />
+              )
+          )}
+        {todoArr.length > 0 &&
+          filter === PENDING &&
+          todoArr.map(
+            (todo, index) =>
+              !todo.completed && (
+                <TodoItem
+                  key={index}
+                  todo={todo}
+                  onDeleteHandler={onDeleteHandler}
+                  onEditHandler={onEditHandler}
+                  handleCompleted={handleCompleted}
+                />
+              )
+          )}
       </div>
     </div>
   );
