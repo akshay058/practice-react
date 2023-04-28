@@ -8,6 +8,7 @@ import ThemeToggle from "./ThemeToggle";
 import UseReducerHook from "./AdvancedHooks/UseReducerHook";
 import UseMemoHook from "./AdvancedHooks/UseMemoHook";
 import Todo from "./Todo";
+import Counter from "./Counter";
 export const messagecontext = createContext(null);
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       {/* <UseReducerHook /> */}
       {/* <UseMemoHook /> */}
       <Todo />
+      {/* <Counter /> */}
     </div>
   );
 }

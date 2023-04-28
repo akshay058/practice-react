@@ -6,13 +6,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 import Nav from "./RouteComp/Nav";
 import AllRouter from "./AllRouter";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      {/* <App /> */}
-      <Nav />
-      <AllRouter />
+      <Provider store={store}>
+        <App />
+        {/* <Nav /> */}
+        {/* <AllRouter /> */}
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

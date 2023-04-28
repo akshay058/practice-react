@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoItem from "./TodoItem";
+import { useDispatch, useSelector } from "react-redux";
+import { addToState } from "./redux/TodoSlice";
 
 export default function Todo() {
   const [inputVal, setInputVal] = useState("");
@@ -15,6 +17,7 @@ export default function Todo() {
   const COMPLETED = "COMPLETED";
   const PENDING = "PENDING";
   const [filter, setFilter] = useState(ALL);
+  const dispatch = useDispatch();
 
   const onAddTodoHandler = () => {
     if (!inputVal) return;
@@ -76,6 +79,9 @@ export default function Todo() {
     const updatedArr = clonedArr.map((elem) => ({ ...elem, completed: true }));
     setTodoArr(updatedArr);
   };
+  useEffect(() => {
+    dispatch(addToState(todoArr));
+  }, [todoArr]);
 
   return (
     <div className="container">
