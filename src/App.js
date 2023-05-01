@@ -36,7 +36,6 @@ function App() {
       {/* <UseMemoHook /> */}
       <Todo />
       {/* <Counter /> */}
-      {/* <></> */}
     </div>
   );
 }
